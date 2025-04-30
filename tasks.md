@@ -2,11 +2,14 @@
 
 <!-- Contexto -->
 
+###Tarefa 1: 
 Corrigido o comportamento da aplicação para permitir que o campo URL de um condomínio seja opcional, mantendo a consistência com a regra de negócio informada no enunciado. A validação anterior exigia obrigatoriamente a URL, mesmo quando o campo era enviado em branco ou não enviado, o que impedia o cadastro de novos condomínios.
 Para isso, foi utilizado uma migration incremental para modificar a estrutura da base de dados sem afetar o histórico de versões.
 
 <!-- Tarefas -->
 
+<!-- Tarefa 1 -->
+###Tarefa 1:
 ## Correção da obrigatoriedade e validação do campo URL
 - [x] Criada a migration incremental `20250430092800_make_url_nullable_on_condominiums`:
   - [x] Tornou o campo `url` da tabela `condominiums` opcional (`nullable`), sem alterar a migration original.
@@ -29,6 +32,5 @@ Para isso, foi utilizado uma migration incremental para modificar a estrutura da
   - [x] Cadastro com URL válida: ✅ sucesso
   - [x] Cadastro com URL inválida: ❌ erro 422 com mensagem amigável
 
-<!-- Tarefa 1 -->
 <!-- Tarefa 2 -->
 <!-- Tarefa 3 -->
