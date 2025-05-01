@@ -30,6 +30,8 @@ class CondominiumService
         // Capture the sanitized and validated data
         $data = $this->validateCondominiumData($data);
 
+        $this->checkUrlUniqueness($data['url']);
+
         $condominium = Condominium::create([
             'name' => $data['name'],
             'zip_code' => $data['zip_code'],
@@ -45,6 +47,9 @@ class CondominiumService
 
         // Capture the sanitized and validated data
         $data = $this->validateCondominiumData($data);
+
+        // Check if the URL is already used by another condominium(excluding itself)
+        $this->checkUrlUniqueness($data['url'], $id);
 
         $condominium->fill([
             'name' => $data['name'],
@@ -88,7 +93,7 @@ class CondominiumService
         // If URL is empty after trimming, treat it as null
         if ($data['url'] === '') {
             $data['url'] = null;
-        // Validate the URL format only if it's not null
+            // Validate the URL format only if it's not null
         } elseif (!filter_var($data['url'], FILTER_VALIDATE_URL)) {
             throw new HttpUnprocessableEntityException('Invalid URL. If you do not have one, you may leave it empty.');
         }
@@ -100,5 +105,29 @@ class CondominiumService
 
         // Return the sanitized and validated data array
         return $data;
+    }
+
+    /**
+     * Check if the given URL is already used by another condominium.
+     * 
+     * @param string|null $url
+     * @param int|null $ignoreId (optional) ID to ignore when updating
+     * @throws HttpUnprocessableEntityException
+     */
+    private function checkUrlUniqueness(?string $url, ?int $ignoreId = null): void
+    {
+        if (empty($url)) {
+            return; // No URL to validate
+        }
+
+        $query = Condominium::where('url', $url);
+
+        if ($ignoreId) {
+            $query->where('id', '!=', $ignoreId);
+        }
+
+        if ($query->exists()) {
+            throw new HttpUnprocessableEntityException('URL is already in use by another condominium.');
+        }
     }
 }
