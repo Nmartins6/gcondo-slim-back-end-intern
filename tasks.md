@@ -39,7 +39,7 @@ O objetivo dessa tarefa foi implementar uma verificação de duplicidade da URL 
 
 <!-- Tarefa 2 -->
 
-###Tarefa 3:
+###Tarefa 2:
 ## Validação de unicidade da URL com mensagem clara:
 - [x] Criado o método privado `checkUrlUniqueness` no `CondominiumService`:
   - [x] Verifica se já existe outro condomínio com a mesma URL.
