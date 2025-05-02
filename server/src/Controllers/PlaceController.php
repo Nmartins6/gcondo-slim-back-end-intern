@@ -27,6 +27,7 @@ class PlaceController
     public function create(Request $request, Response $response): Response
     {
         $body = $request->getParsedBody();
+        
         $data = ['place' => $this->service->create($body)];
         return ResponseBuilder::respondWithData($response, HttpStatus::Created, $data);
     }
@@ -34,6 +35,7 @@ class PlaceController
     public function update(Request $request, Response $response, array $args): Response
     {
         $body = $request->getParsedBody();
+        
         $data = ['place' => $this->service->update($args['id'], $body)];
         return ResponseBuilder::respondWithData($response, data: $data);
     }
@@ -41,6 +43,7 @@ class PlaceController
     public function delete(Request $request, Response $response, array $args): Response
     {
         $deleted = $this->service->delete($args['id']);
+        
         $status = $deleted ? HttpStatus::OK : HttpStatus::ServerError;
         return ResponseBuilder::respondWithData($response, $status);
     }

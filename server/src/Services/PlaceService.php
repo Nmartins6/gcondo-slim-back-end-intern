@@ -26,38 +26,56 @@ class PlaceService
 
     public function create(array $data): Place
     {
-        $this->validate($data);
-        return Place::create($data);
+        $this->validatePlaceData($data);
+
+        $place = Place::create([
+            'name' => $data['name'],
+            'max_people' => $data['max_people'],
+            'square_meters' => $data['square_meters'] ?? null,
+        ]);
+
+        return $place;
     }
 
     public function update(int $id, array $data): Place
     {
-        $place = Place::findOrFail($id);
+        $place = $this->find($id);
 
-        $this->validate($data);
-        $place->update($data);
+        $this->validatePlaceData($data);
+
+        $place->fill([
+            'name' => $data['name'],
+            'max_people' => $data['max_people'],
+            'square_meters' => $data['square_meters'] ?? null,
+        ]);
+
+        $place->save();
 
         return $place;
     }
 
     public function delete(int $id): bool
     {
-        $place = Place::findOrFail($id);
+        $place = $this->find($id);
+
         return $place->delete();
     }
 
-    private function validate(array $data): void
+    /** @throws HttpUnprocessableEntityException */
+    private function validatePlaceData(array $data): void
     {
         if (empty($data['name'])) {
             throw new HttpUnprocessableEntityException('Name is required');
         }
 
-        if (empty($data['max_people']) || !is_numeric($data['max_people'])) {
-            throw new HttpUnprocessableEntityException('max_people must be a number');
+        if (!isset($data['max_people']) || !is_numeric($data['max_people']) || $data['max_people'] <= 0) {
+            throw new HttpUnprocessableEntityException('max_people must be a positive number');
         }
 
-        if (isset($data['square_meters']) && !is_numeric($data['square_meters'])) {
-            throw new HttpUnprocessableEntityException('square_meters must be a number');
+        if (isset($data['square_meters']) && !is_null($data['square_meters'])) {
+            if (!is_numeric($data['square_meters']) || $data['square_meters'] <= 0) {
+                throw new HttpUnprocessableEntityException('square_meters must be a positive number');
+            }
         }
     }
 }

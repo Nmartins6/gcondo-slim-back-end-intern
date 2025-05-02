@@ -56,7 +56,7 @@
       "url": "{{ baseUrl }}/reservations",
       "body": {
         "mimeType": "application/json",
-        "text": "{\n \"name\": \"Aniversario Joao\",\n \"unit_id\": 1,\n \"people_amount\": 30,\n \"date\": \"2025-12-20\"\n}"
+        "text": "{\n  \"name\": \"Aniversario Joao\",\n  \"unit_id\": 1,\n  \"people_amount\": 30,\n  \"date\": \"2025-12-20\"\n}"
       },
       "parameters": [],
       "headers": [
@@ -107,22 +107,8 @@
       "_type": "request"
     },
     {
-      "_id": "fld_reservations",
-      "parentId": "wrk_80d9b50c5b7949e99353c3e72042b768",
-      "name": "Reservations",
-      "_type": "request_group"
-    },
-    {
-      "_id": "req_get_reservations",
-      "parentId": "fld_reservations",
-      "name": "List reservations",
-      "method": "GET",
-      "url": "{{ baseUrl }}/reservations",
-      "_type": "request"
-    },
-    {
       "_id": "req_get_reservation",
-      "parentId": "fld_reservations",
+      "parentId": "fld_reservations_group_001",
       "name": "Get reservation by ID",
       "method": "GET",
       "url": "{{ baseUrl }}/reservations/1",
@@ -130,13 +116,13 @@
     },
     {
       "_id": "req_put_reservation",
-      "parentId": "fld_reservations",
+      "parentId": "fld_reservations_group_001",
       "name": "Update reservation",
       "method": "PUT",
       "url": "{{ baseUrl }}/reservations/1",
       "body": {
         "mimeType": "application/json",
-        "text": "{\n  \"name\": \"Churrasco de família\",\n  \"unit_id\": 1,\n  \"place_id\": 1,\n  \"people_amount\": 25,\n  \"date\": \"2025-12-20\"\n}"
+        "text": "{\n  \"name\": \"Churrasco de fam\\u00edlia\",\n  \"unit_id\": 1,\n  \"place_id\": 1,\n  \"people_amount\": 25,\n  \"date\": \"2025-12-20\"\n}"
       },
       "headers": [
         {
@@ -148,7 +134,7 @@
     },
     {
       "_id": "req_delete_reservation",
-      "parentId": "fld_reservations",
+      "parentId": "fld_reservations_group_001",
       "name": "Delete reservation",
       "method": "DELETE",
       "url": "{{ baseUrl }}/reservations/1",
