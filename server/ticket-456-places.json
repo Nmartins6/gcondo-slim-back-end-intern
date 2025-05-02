@@ -1,0 +1,117 @@
+{
+  "_type": "export",
+  "__export_format": 4,
+  "__export_date": "2025-05-02T00:00:00.000Z",
+  "__export_source": "insomnia.desktop.app:v10.3.1",
+  "resources": [
+    {
+      "_id": "wrk_001",
+      "parentId": null,
+      "modified": 1745694215191,
+      "created": 1745694215191,
+      "name": "Gcondo Slim",
+      "description": "",
+      "scope": "collection",
+      "_type": "workspace"
+    },
+    {
+      "_id": "env_001",
+      "parentId": "wrk_001",
+      "modified": 1730000000000,
+      "created": 1730000000000,
+      "name": "Base Environment",
+      "data": {
+        "baseUrl": "http://localhost:8080"
+      },
+      "dataPropertyOrder": null,
+      "color": null,
+      "isPrivate": false,
+      "metaSortKey": 1745498334989,
+      "_type": "environment"
+    },
+    {
+      "_id": "jar_001",
+      "parentId": "wrk_001",
+      "modified": 1745498346850,
+      "created": 1745498346850,
+      "name": "Default Jar",
+      "cookies": [],
+      "_type": "cookie_jar"
+    },
+    {
+      "_id": "fld_places_group_001",
+      "parentId": "wrk_001",
+      "modified": 1730000000000,
+      "created": 1730000000000,
+      "name": "Places",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -1745498333000,
+      "_type": "request_group"
+    },
+    {
+      "_id": "req_create_place",
+      "parentId": "fld_places_group_001",
+      "name": "Create place",
+      "method": "POST",
+      "url": "{{ baseUrl }}/places",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"name\": \"Sal\\u00e3o de Festas\",\n  \"max_people\": 50,\n  \"square_meters\": 120\n}"
+      },
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "_type": "request"
+    },
+    {
+      "_id": "req_list_places",
+      "parentId": "fld_places_group_001",
+      "name": "List places",
+      "method": "GET",
+      "url": "{{ baseUrl }}/places",
+      "body": {},
+      "parameters": [],
+      "headers": [],
+      "_type": "request"
+    },
+    {
+      "_id": "req_get_place",
+      "parentId": "fld_places_group_001",
+      "name": "Get place by ID",
+      "method": "GET",
+      "url": "{{ baseUrl }}/places/1",
+      "_type": "request"
+    },
+    {
+      "_id": "req_update_place",
+      "parentId": "fld_places_group_001",
+      "name": "Update place",
+      "method": "PUT",
+      "url": "{{ baseUrl }}/places/1",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"name\": \"Sal\\u00e3o de Jogos\",\n  \"max_people\": 40,\n  \"square_meters\": 100\n}"
+      },
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "_type": "request"
+    },
+    {
+      "_id": "req_delete_place",
+      "parentId": "fld_places_group_001",
+      "name": "Delete place",
+      "method": "DELETE",
+      "url": "{{ baseUrl }}/places/1",
+      "_type": "request"
+    }
+  ]
+}

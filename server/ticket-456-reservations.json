@@ -1,0 +1,144 @@
+{
+  "_type": "export",
+  "__export_format": 4,
+  "__export_date": "2025-05-02T00:00:00.000Z",
+  "__export_source": "insomnia.desktop.app:v10.3.1",
+  "resources": [
+    {
+      "_id": "wrk_001",
+      "parentId": null,
+      "modified": 1745694215191,
+      "created": 1745694215191,
+      "name": "Gcondo Slim",
+      "description": "",
+      "scope": "collection",
+      "_type": "workspace"
+    },
+    {
+      "_id": "env_001",
+      "parentId": "wrk_001",
+      "modified": 1730000000000,
+      "created": 1730000000000,
+      "name": "Base Environment",
+      "data": {
+        "baseUrl": "http://localhost:8080"
+      },
+      "dataPropertyOrder": null,
+      "color": null,
+      "isPrivate": false,
+      "metaSortKey": 1745498334989,
+      "_type": "environment"
+    },
+    {
+      "_id": "jar_001",
+      "parentId": "wrk_001",
+      "modified": 1745498346850,
+      "created": 1745498346850,
+      "name": "Default Jar",
+      "cookies": [],
+      "_type": "cookie_jar"
+    },
+    {
+      "_id": "fld_reservations_group_001",
+      "parentId": "wrk_001",
+      "modified": 1730000000000,
+      "created": 1730000000000,
+      "name": "Reservations",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -1745498334000,
+      "_type": "request_group"
+    },
+    {
+      "_id": "req_615387ef43e64b5d909dc30dd3e6bb7e",
+      "name": "Create reservation",
+      "url": "{{ baseUrl }}/reservations",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"name\": \"Aniversario Joao\",\n  \"unit_id\": 1,\n  \"people_amount\": 30,\n  \"date\": \"2025-12-20\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "modified": 1746192381653,
+      "created": 1746192381653,
+      "description": "",
+      "method": "POST",
+      "metaSortKey": -1745498334990,
+      "isPrivate": false,
+      "pathParameters": [],
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request",
+      "parentId": "fld_reservations_group_001"
+    },
+    {
+      "_id": "req_get_reservations_001",
+      "parentId": "fld_reservations_group_001",
+      "modified": 1746192382653,
+      "created": 1746192382653,
+      "url": "{{ baseUrl }}/reservations",
+      "name": "List reservations",
+      "description": "Retrieve all reservations",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [],
+      "authentication": {},
+      "metaSortKey": -1745498334991,
+      "isPrivate": false,
+      "pathParameters": [],
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_get_reservation",
+      "parentId": "fld_reservations_group_001",
+      "name": "Get reservation by ID",
+      "method": "GET",
+      "url": "{{ baseUrl }}/reservations/1",
+      "_type": "request"
+    },
+    {
+      "_id": "req_put_reservation",
+      "parentId": "fld_reservations_group_001",
+      "name": "Update reservation",
+      "method": "PUT",
+      "url": "{{ baseUrl }}/reservations/1",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"name\": \"Churrasco de fam\\u00edlia\",\n  \"unit_id\": 1,\n  \"place_id\": 1,\n  \"people_amount\": 25,\n  \"date\": \"2025-12-20\"\n}"
+      },
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "_type": "request"
+    },
+    {
+      "_id": "req_delete_reservation",
+      "parentId": "fld_reservations_group_001",
+      "name": "Delete reservation",
+      "method": "DELETE",
+      "url": "{{ baseUrl }}/reservations/1",
+      "_type": "request"
+    }
+  ]
+}
