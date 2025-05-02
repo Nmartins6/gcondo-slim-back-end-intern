@@ -9,14 +9,10 @@ use App\Models\Place;
 
 class ReservationService
 {
-    /**
-     * Create a reservation with basic validation.
-     * 
-     * @throws HttpUnprocessableEntityException
-     */
     public function create(array $data): Reservation
     {
         $this->validateReservationData($data);
+        $this->checkForConflicts($data);
 
         return Reservation::create($data);
     }
@@ -24,6 +20,31 @@ class ReservationService
     public function list(): array
     {
         return Reservation::with(['unit', 'place'])->get()->toArray();
+    }
+
+
+    public function update(int $id, array $data): Reservation
+    {
+        $reservation = Reservation::findOrFail($id);
+
+        $this->validateReservationData($data);
+        $this->checkForConflicts($data);
+
+        $reservation->update($data);
+
+        return $reservation;
+    }
+
+    public function find(int $id): array
+    {
+        $reservation = Reservation::with(['unit', 'place'])->findOrFail($id);
+        return $reservation->toArray();
+    }
+
+    public function delete(int $id): bool
+    {
+        $reservation = Reservation::findOrFail($id);
+        return $reservation->delete();
     }
 
     private function validateReservationData(array $data): void
@@ -46,6 +67,21 @@ class ReservationService
 
         if (empty($data['date']) || !preg_match('/^\d{4}-\d{2}-\d{2}$/', $data['date'])) {
             throw new HttpUnprocessableEntityException('Invalid date format (expected YYYY-MM-DD)');
+        }
+    }
+
+    private function checkForConflicts(array $data): void
+    {
+        if (empty($data['place_id'])) {
+            return;
+        }
+
+        $exists = Reservation::where('place_id', $data['place_id'])
+            ->where('date', $data['date'])
+            ->exists();
+
+        if ($exists) {
+            throw new HttpUnprocessableEntityException('A reservation already exists for this place and date.');
         }
     }
 }
